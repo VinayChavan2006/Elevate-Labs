@@ -1,0 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
+}
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+}
+
+nav {
+  width: 100%;
+  padding: 20px 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+nav > div > p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.links li {
+  list-style: none;
+}
+
+.links li a {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+}
+
+.links li a:hover {
+  text-decoration: underline;
+  color: #333;
+}
+
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px 10%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-info-box {
+  width: 55%;
+  min-width: 280px;
+}
+
+.name-info #name {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+#title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.my-description p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+#contact-btn {
+  background-color: black;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#contact-btn:hover {
+  background-color: #222;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-pic {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pic {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/012/419/514/non_2x/young-business-man-portrait-at-modern-office-free-photo.jpg");
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  background-color: #111;
+  color: white;
+  padding: 40px 10%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+footer div {
+  flex: 1;
+  min-width: 200px;
+}
+
+footer hr {
+  border: none;
+  height: 1px;
+  background: #333;
+  margin: 10px 0;
+}
+
+.soc-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.soc-icons a {
+  color: white;
+  font-size: 1.5rem;
+  transition: 0.3s;
+}
+
+.soc-icons a:hover {
+  color: #ddd;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left-info-box,
+  .profile-pic {
+    width: 100%;
+  }
+
+  #pic {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .links {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 400px) {
+  #name {
+    font-size: 2rem;
+  }
+
+  #title {
+    font-size: 1rem;
+  }
+
+  .my-description p {
+    font-size: 0.9rem;
+  }
+
+  #contact-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
