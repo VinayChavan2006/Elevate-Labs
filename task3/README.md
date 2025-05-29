@@ -16,7 +16,8 @@ This is a simple Express.js REST API for managing a list of books. You can view,
 ## Installation
 - Clone the Repository
  ```
-git clone https://github.com/VinayChavan2006/Elevate-Labs/main/task3
+git clone [https://github.com/VinayChavan2006/Elevate-Labs/main/task3](https://github.com/VinayChavan2006/Elevate-Labs.git)
+cd Elevate-Labs/task3
  ```
 - Run the command
 ```
