@@ -30,9 +30,47 @@ node index.js
 ```
 Now server will be running on http://localhost:3000
 
-- Use **Postman** to test the API Endpoints
-- GET: '/books' - returns all the books
-- POST: '/books' - add a new book to the list
-- PUT: '/books/:id' - updates the attributes of book with the id from the params
-- DELETE: '/books/:id' - delete the book with id which is in the params
+## API Endpoints
+
+### Get all books
+
+- **GET** `/books`
+- **Response:** Array of book objects
+
+### Add a new book
+
+- **POST** `/books`
+- **Body:** JSON  
+  ```
+  {
+    "id": 2,
+    "title": "Book Title",
+    "author": "Author Name"
+  }
+  ```
+- **Response:** The created book object
+
+### Update a book
+
+- **PUT** `/books/:id`
+- **Body:** JSON  
+  ```
+  {
+    "title": "Updated Title",
+    "author": "Updated Author"
+  }
+  ```
+- **Response:** The updated book object
+
+### Delete a book
+
+- **DELETE** `/books/:id`
+- **Response:** Success message and deleted book object
+
+## Notes
+
+- All endpoints expect and return JSON.
+- The book list is stored in memory and will reset when the server restarts.
+
+
   
