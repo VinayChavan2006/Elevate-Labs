@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volux</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=eltNESpdWzgO&format=png&color=000000"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Home Page -->
+    <div id="main-page">
+      <!-- Nav bar -->
+      <nav>
+        <div id="logo">
+          <p class="title">Volux</p>
+        </div>
+        <div id="hamburger">
+                &#9776
+            </div>
+        <div id="nav-links">
+            
+          <li>
+            <a href="#"> Home Page </a>
+          </li>
+          <li><a href="#about"> About Us </a></li>
+          <li><a href="#projects"> Projects </a></li>
+          <li><a href=""> Career </a></li>
+          <li><a href=""> Blog </a></li>
+          <li>
+            <button id="nav-button">Get in Touch</button>
+          </li>
+        </div>
+      </nav>
+
+      <hr />
+      <!-- Main Hero section -->
+      <div class="main-body">
+        <div class="tag-text">
+          <p class="tag-line">Medium length section heading goes here</p>
+          <p class="tag-support-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse
+            varius enim in eros elementum tristique. Duis cursus, mi quis
+            viverra ornare, eros dolor interdum nulla, ut commodo diam libero
+            vitae erat.
+          </p>
+          <button id="explore-btn">Explore</button>
+        </div>
+        <div class="home-image">
+          <div class="left-img">
+            <img src="assets/bottles1.jpg" alt="Bottles" />
+          </div>
+          <div class="right-img">
+            <img src="assets/juice.jpg" alt="Juice" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Page 2 of website-->
+    <div class="page2" id="about">
+      <div class="tag-text">
+        <p class="tag-line">Describing the nice features</p>
+        <p class="tag-support-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse
+          varius enim in eros elementum tristique. Duis cursus, mi quis viverra
+          ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+        </p>
+        <button id="explore-btn">View More</button>
+      </div>
+      <div class="page-image">
+        <div class="img">
+          <img src="assets/bottles1.jpg" alt="Bottles" />
+        </div>
+      </div>
+    </div>
+    <!--- Page3 of website -->
+    <div class="page3" id="projects">
+      <div class="tag-text">
+        <p class="tag-line">Enhancing the extra ordinary product features</p>
+        <p class="tag-support-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit Suspendisse
+          varius enim in eros elementum tristique. Duis cursus, mi quis viverra
+          ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+        </p>
+        <button id="explore-btn">View More</button>
+      </div>
+      <div class="page-image">
+        <div class="img">
+          <img src="assets/bottles1.jpg" alt="Bottles" />
+        </div>
+      </div>
+    </div>
+    <!--Footer Section-->
+    <footer>
+      <div class="footer-side1">
+        <div id="logo">
+          <span class="title">Volux</span>
+        </div>
+        <span>Address:</span>
+        <br />
+        <span>LevelI , Figma Street</span>
+        <br /><br />
+        <span>Contact:</span>
+        <br />
+        <span>+91 6360264355</span>
+        <br />
+        <span>vinay23@iitk.ac.in</span>
+      </div>
+      <div class="footer-side2">
+        <div>
+          <ul>
+            <li>Home Page</li><br>
+            <li>About Us</li><br>
+            <li>Projects</li><br>
+            <li>Others</li><br>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Contact Us</li><br>
+            <li>Career</li><br>
+            <li>Blog</li><br>
+            <li>Articles</li><br>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script>
+        // show column wise links on click of hamburger icon
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("nav-links");
+        hamburger.addEventListener("click",()=>{
+            if (navLinks.style.display === "block") {
+                navLinks.style.display = "none";
+            } else {
+                navLinks.style.display = "block";
+            }
+        })
+        console.log(document.body.clientWidth);
+        if(document.body.clientWidth > 768) {
+            navLinks.style.display = "flex";
+        } else {
+            navLinks.style.display = "none";
+        }
+
+    </script>
+  </body>
+</html>
