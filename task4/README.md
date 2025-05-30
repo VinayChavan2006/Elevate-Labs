@@ -26,4 +26,6 @@ A responsive web application designed to showcase various features and projects.
    ```bash
    git clone https://github.com/VinayChavan2006/Elevate-Labs.git
    ```
-   2. cd Elevate-Labs/task4
+2. ```
+   cd Elevate-Labs/task4
+   ```
