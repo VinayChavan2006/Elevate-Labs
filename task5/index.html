@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=DM Sans"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="contact-us-info">
+        <div>
+          <h1>Contact Us</h1>
+          <p>We're here to help you</p>
+        </div>
+        <div class="way">
+          <div>
+            <!--phone icon here-->
+            <i class="fa-solid fa-phone"></i>
+          </div>
+          <div>
+            <p id="contact-way">PHONE</p>
+            <p id="contact-detail">+91 6360264355</p>
+          </div>
+        </div>
+        <div class="way">
+          <div>
+            <!--email icon here-->
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div>
+            <p id="contact-way">EMAIL</p>
+            <p id="contact-detail">vinay23@iitk.ac.in</p>
+          </div>
+        </div>
+        <div class="way">
+          <div>
+            <!--location icon here-->
+            <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+          <div>
+            <p id="contact-way">LOCATION</p>
+            <p id="contact-detail">Kalyanpur, Kanpur, 208016</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-us-form">
+        <div id="header">
+          <h1>Let's Talk</h1>
+          <p>Feel free to drop a message to us</p>
+        </div>
+        <form action=".contact-us-form">
+          <div class="input-div">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter Name" />
+            <p id="name-error"></p>
+          </div>
+          <div class="input-div">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter Email"
+            />
+            <p id="email-error"></p>
+          </div>
+          <div class="input-div">
+            <label for="message">Message</label>
+            <textarea
+              name="message"
+              id="message"
+              rows="6"
+              placeholder="Enter your message"
+            ></textarea>
+            <p id="message-error"></p>
+          </div>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
