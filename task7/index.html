@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      h1 {
+        text-align: center;
+      }
+      body {
+        background-color: #ccc;
+      }
+      .main {
+        min-height: 100vh;
+        width: 100vw;
+        padding: 3rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 5px black;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+        border-radius: 5px;
+        color: #222;
+        background-image: radial-gradient(
+          circle farthest-corner at 3.2% 49.6%,
+          rgba(80, 12, 139, 0.87) 0%,
+          rgba(161, 10, 144, 0.72) 83.6%
+        );
+      }
+      button{
+        background-color: crimson;
+        color: white;
+        padding: 0.4rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 3.5rem;
+      }
+      button:hover{
+        transform: scale(1.05);
+      }
+      button:active{
+        background-color: rgb(230, 54, 89);
+      }
+      .error {
+        text-align: center;
+        font-weight: bolder;
+        font-size: 3.5rem;
+      }
+      #error-box {
+        /* height: 100vh; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <title>Users Page</title>
+  </head>
+  <body>
+    <h1>Users Information</h1>
+    <button >Reload</button>
+    <div id="error-box"></div>
+    <div class="main"></div>
+    <script>
+      let mainBox = document.getElementsByClassName("main")[0];
+      let errorBox = document.getElementById("error-box");
+      function getUsers() {
+        console.log('called')
+        try {
+          fetch("https://jsonplaceholder.typicode.com/users")
+            .then((response) => response.json())
+            .catch(
+              (err) => {
+                // errorBox.style.visibility = 'visible'
+                (errorBox.innerHTML = `<p class="error">${err}</p>`)
+            }
+            )
+            .then((data) => {
+                if(data) errorBox.innerText = ''
+              data.map((inst) => {
+                mainBox.innerHTML += `
+                    <div class="card">
+                        <h2>${inst.name}</h2>
+                        <p>${inst.email}</p>
+                        <p>${[
+                          inst.address.street,
+                          inst.address.suite,
+                          inst.address.city,
+                        ].join(", ")}</p>
+                    </div>
+                `;
+              });
+            });
+        } catch (error) {
+          body.innerHTML += `Error ${error}`;
+        }
+      }
+
+      getUsers()
+      document.getElementsByTagName("button")[0].addEventListener("click",()=>{
+        mainBox.innerHTML = ``;
+        getUsers()
+      })
+
+      function handleLoad(){
+        
+        mainBox.innerHTML = ``;
+        getUsers()
+      }
+    </script>
+  </body>
+</html>
