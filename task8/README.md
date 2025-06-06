@@ -33,7 +33,7 @@ assets/
 
 ## Screenshots
 
-![Screenshot](assets/banner-bg.jpg)
+![Screenshot](assets/webpage.png)
 
 ## Dependencies
 
