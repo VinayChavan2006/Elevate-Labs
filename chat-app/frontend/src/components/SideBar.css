@@ -1,0 +1,174 @@
+/* components/Sidebar.css */
+.sidebar {
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #eeeeee;
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition for width and padding */
+    overflow: hidden; /* Hide overflow content during transition */
+    flex-shrink: 0; /* Prevent it from shrinking beyond its content */
+    border-radius: 0 10px 10px 0; /* Added rounded corners */
+}
+
+/* Expanded state */
+.sidebar.expanded {
+    width: 250px;
+    padding: 20px 0;
+}
+
+/* Collapsed state */
+.sidebar.collapsed {
+    width: 80px; /* Adjust as needed for collapsed width (icon only) */
+    padding: 20px 0; /* Maintain vertical padding */
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start; /* Align items to the start when collapsed */
+}
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333333;
+    margin-right: 20px; /* Space between hamburger and avatar when expanded */
+    border-radius: 50%; /* Rounded button */
+    width: 40px; /* Fixed size for the button */
+    height: 40px;
+    transition: background-color 0.2s;
+}
+
+.hamburger-menu:hover {
+    background-color: #f0f2f5;
+}
+
+/* Adjust hamburger margin when sidebar is collapsed */
+.sidebar.collapsed .hamburger-menu {
+    margin: 0 auto; /* Center the hamburger icon when collapsed */
+}
+
+.user-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+}
+
+.user-name {
+    font-weight: 600;
+    color: #333333;
+    flex-grow: 1; /* Pushes arrow to the right */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #777777;
+    margin-left: 5px;
+    flex-shrink: 0; /* Prevent arrow from shrinking */
+}
+
+.sidebar-nav {
+    width: 100%;
+    flex-grow: 1; /* Takes available space */
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    color: #777777;
+    transition: background-color 0.2s, color 0.2s, padding 0.3s ease-in-out;
+    border-left: 4px solid transparent; /* Default transparent border */
+}
+
+.nav-item:hover {
+    background-color: #f0f2f5;
+    color: #333333;
+}
+
+.nav-item.active {
+    background-color: #e0effb; /* Lighter blue for active state */
+    color: #007bff; /* Primary blue for active text/icon */
+    border-left-color: #007bff; /* Active indicator */
+}
+
+.nav-item svg {
+    margin-right: 15px;
+    color: inherit; /* Inherit color from parent */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Adjust nav-item padding when collapsed */
+.sidebar.collapsed .nav-item {
+    padding: 12px 0; /* Remove horizontal padding when collapsed */
+    justify-content: center; /* Center icons */
+}
+
+.sidebar.collapsed .nav-item svg {
+    margin-right: 0; /* Remove icon margin */
+}
+
+.sidebar.collapsed .nav-item.active {
+    border-left-color: transparent; /* Hide left border when collapsed */
+    /* If you still want an active indicator when collapsed, you might
+       consider a different visual cue, e.g., a background color change */
+}
+
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #777777;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid #eeeeee;
+    transition: padding 0.3s ease-in-out;
+}
+
+.sidebar-footer:hover {
+    background-color: #f0f2f5;
+    color: #333333;
+}
+
+.sidebar-footer svg {
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+/* Adjust footer padding when collapsed */
+.sidebar.collapsed .sidebar-footer {
+    padding: 15px 0; /* Remove horizontal padding */
+    justify-content: center; /* Center icons */
+}
+
+.sidebar.collapsed .sidebar-footer svg {
+    margin-right: 0; /* Remove icon margin */
+}
