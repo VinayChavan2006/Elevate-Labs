@@ -2,7 +2,7 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { User } from "../models/UserModel.js";
 import { createToken } from "../utils/createToken.js";
-import { socket } from "../../frontend/src/socket/socket.js";
+
 
 export const login = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ export const login = async (req, res) => {
       });
     }
     createToken(res, user?._id);
-    socket.emit('setup',user?._id)
+    // socket.emit('setup',user?._id)
     return res.status(200).json(user);
   } catch (error) {
     console.error(`Error in login : ${error}`);
@@ -84,10 +84,11 @@ export const logout = (req, res) => {
       httpOnly: true,
       expires: new Date(0),
     });
-    socket.emit('logout',req.user?._id)
+    // socket.emit('logout',req.user?._id)
     return res.status(200).json({
       message: "Logged out successfully",
       success: true,
+      userId: req.user?._id
     });
   } catch (error) {
     console.error(`Error Logging out: ${error}`);

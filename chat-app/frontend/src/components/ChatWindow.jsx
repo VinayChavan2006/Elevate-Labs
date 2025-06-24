@@ -16,15 +16,18 @@ import {
   useDeleteChatMessagesMutation,
   useGetAllMessagesQuery,
   useSendMessageMutation,
+  useUpdateMessageStatusMutation,
 } from "../redux/api/messageSlice.js";
 import { toast } from "react-toastify";
 import { socket } from "../socket/socket.js";
 import {
   useDeleteGroupChatMutation,
   useDeletePrivateChatMutation,
+  useUpdateLastMessageMutation,
 } from "../redux/api/chatSlice.js";
 import Picker from "@emoji-mart/react";
-import emojiData from "@emoji-mart/data"; // Import emoji data
+import emojiData from "@emoji-mart/data";
+import { updateChatLastMessage } from "../redux/features/chatSlice.js";
 
 const ChatWindow = () => {
   const [selectedChat, setSelectedChat] = useState(null);
@@ -85,19 +88,25 @@ const ChatWindow = () => {
     }
   }, [selectedChat]);
 
-  // set user status
+  const [updateMessageStatus] = useUpdateMessageStatusMutation();
+  // set user status and message status
   useEffect(() => {
     if (!userInfo?._id || !selectedChat?._id) return;
 
     socket.emit("join-room", selectedChat?._id);
 
-    const messageHandler = (data) => {
+    const messageHandler = async (data) => {
+      // console.log(data)
       setMessages((prevMessages) => {
         let alreadyExists = prevMessages.some(
           (msg) => msg?._id == data?.messageItem?._id
         );
         if (alreadyExists) return prevMessages;
         return [...prevMessages, data?.messageItem];
+      });
+      await updateMessageStatus({
+        messageId: data?.messageItem?._id,
+        status: "delivered",
       });
     };
     socket.on("recieved-message", messageHandler);
@@ -155,10 +164,11 @@ const ChatWindow = () => {
     };
     try {
       // Call the sendMessage API
-      await sendMessage({
+      const res = await sendMessage({
         chatId: selectedChat._id,
         message: messageInput,
       });
+      updateChatLastMessage(res?.data?.sentMessage);
     } catch (error) {
       toast.error(error?.data?.message || "Failed to send message");
     }
@@ -200,6 +210,7 @@ const ChatWindow = () => {
   const handleClearChatMessages = async () => {
     let res = await deleteChatMessages({ chatId: selectedChat?._id });
     if (res.data?.success) {
+      socket.emit("clear-chat", selectedChat?._id);
       toast.success(res.data?.message);
     } else {
       toast.error(res.data?.message);
@@ -208,8 +219,8 @@ const ChatWindow = () => {
   };
 
   // handle emojis in the chat
-  const handleEmojiClick = (emoji) => {
-    setMessageInput((prev) => prev + emoji.native);
+  const handleEmojiSelect = (e) => {
+    setMessageInput((prev) => prev + e.native);
   };
   const emojiPickerRef = useRef(null);
   useEffect(() => {
@@ -227,8 +238,31 @@ const ChatWindow = () => {
     };
   }, []);
 
+  // update message as seen
+  useEffect(() => {
+    console.log("making seen..");
+    if (messages.length === 0) return;
+    const markMessagesSeen = async () => {
+      const newMessages = await Promise.all(
+        messages.map(async (msg) => {
+          if (msg.sender !== userInfo._id) {
+            await updateMessageStatus({ messageId: msg._id, status: "seen" });
+          }
+        })
+      );
+      console.log(newMessages);
+      setMessages(messages);
+    };
+    markMessagesSeen();
+  }, [selectedChat, userInfo, messages.length]);
+  
+  // re render on changing messages
+  useEffect(()=>{
+    console.log(messages[messages.length - 1])
+  },[messages.length])
+
   return (
-    <div className="flex-grow h-100vh">
+    <div className="w-[60%] h-100vh">
       {!selectedChat ? (
         <div className="h-full flex justify-center items-center">
           <p>Select a Chat to start messaging</p>
@@ -285,7 +319,7 @@ const ChatWindow = () => {
             <div ref={bottomRef}></div>
           </div>
 
-          <div className="h-[10%] flex items-center p-4 bg-white border-t border-gray-200 shadow-sm">
+          <div className="h-[10%] flex items-center p-4 bg-white border-t border-gray-200 shadow-sm relative">
             <button className="text-gray-500 hover:text-gray-800 p-2 rounded-full transition-colors">
               <Paperclip size={20} />
             </button>
@@ -295,13 +329,15 @@ const ChatWindow = () => {
               className="flex-grow mx-3 px-4 py-2 bg-gray-100 rounded-full outline-none text-gray-800 placeholder-gray-500 text-sm focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all duration-200"
               onChange={handleTyping}
               value={messageInput}
-              onKeyPress={(e) => {
+              onKeyDown={(e) => {
                 if (e.key === "Enter") handleSendMessage();
               }}
             />
             <button
               className="text-gray-500 hover:text-gray-800 p-2 rounded-full transition-colors"
-              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+              onClick={() => {
+                setShowEmojiPicker(!showEmojiPicker);
+              }}
             >
               <Smile size={20} />
             </button>
@@ -312,7 +348,7 @@ const ChatWindow = () => {
               >
                 <Picker
                   data={emojiData}
-                  onEmojiSelect={handleEmojiClick}
+                  onEmojiSelect={handleEmojiSelect}
                   theme="light" // Or "dark", "auto"
                   perLine={9} // Number of emojis per line
                   emojiSize={24}

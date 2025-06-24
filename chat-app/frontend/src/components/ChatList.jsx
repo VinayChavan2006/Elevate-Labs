@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import { PlusCircle, Search } from "lucide-react";
-import { useGetUserChatsQuery } from "../redux/api/chatSlice";
 import { useSelector } from "react-redux";
+import { socket } from "../socket/socket.js";
 
-const ChatList = ({ setIsPopupOpen , data, isLoading, error, onlineStatus}) => {
+const ChatList = ({ setIsPopupOpen, data, isLoading, error, onlineStatus }) => {
   const [chats, setChats] = useState([]);
   const [filteredChats, setFilteredChats] = useState([]);
+  
   // get user info from redux store
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(onlineStatus)
-  // get user chats
-  // const { data, isLoading, error } = useGetUserChatsQuery({
-  //   userId: userInfo?._id,
-  // });
+  console.log(onlineStatus);
 
   useEffect(() => {
     setChats(data);
     setFilteredChats(data);
-  }, [data, isLoading, chats,filteredChats,onlineStatus]);
+  }, [data, isLoading, chats, filteredChats, onlineStatus]);
 
   // filter chats based on search input
   const filterChats = (searchString) => {
@@ -28,6 +25,15 @@ const ChatList = ({ setIsPopupOpen , data, isLoading, error, onlineStatus}) => {
     console.log(filtered);
     setFilteredChats(filtered);
   };
+
+  // join room for all chats
+  useEffect(() => {
+    if (!data) return;
+    data.map((chat) => {
+      socket.emit("join-room", chat?._id);
+    });
+  }, [data, chats, onlineStatus, userInfo]);
+
 
   return (
     <div className="w-2/5 h-full bg-white shadow p-4">
@@ -63,7 +69,11 @@ const ChatList = ({ setIsPopupOpen , data, isLoading, error, onlineStatus}) => {
         <div className="h-[calc(100vh-120px)] overflow-auto scroll">
           {filteredChats && filteredChats?.length ? (
             filteredChats.map((chat) => (
-              <ChatItem chat={chat} onlineStatus={onlineStatus} key={chat?._id} />
+              <ChatItem
+                chat={chat}
+                onlineStatus={onlineStatus}
+                key={chat?._id}
+              />
             ))
           ) : (
             <h1 className="text-center mt-6 text-2xl text-shadow-black font-bold">

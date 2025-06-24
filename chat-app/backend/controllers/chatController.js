@@ -294,3 +294,32 @@ export const exitGroupChat = async(req, res) => {
     }
 
 }
+
+export const updateLastMessage = async(req, res) => {
+    try {
+        const {chatId} = req.params
+        const {messageId} = req.body
+        console.log(chatId, messageId)
+        if(!messageId){
+            return res.status(400).json({
+                success: false,
+                message: "Message not found"
+            })
+        }
+        const chat = await Chat.findByIdAndUpdate(chatId, {lastMessage: new mongoose.Types.ObjectId(messageId)},{new: true})
+        if(!chat){
+            return res.status(400).json({
+                success: false,
+                message : "Chat not found"
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            updatedChat: chat
+        })
+
+    } catch (error) {
+        console.error(`Error updating last message: ${error}`)
+    }
+}

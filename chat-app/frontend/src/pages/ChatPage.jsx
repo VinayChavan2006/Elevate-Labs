@@ -39,6 +39,7 @@ const ChatPage = () => {
     };
   }, [userInfo, data]); // KEEP this here
 
+
   return !isPopupOpen ? (
     <div className="flex">
       <SideBar />

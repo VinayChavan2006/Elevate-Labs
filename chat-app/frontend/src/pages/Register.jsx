@@ -45,6 +45,7 @@ const Register = () => {
         setIsLoading(false)
         return;
       }
+      socket.emit('setup',response?.data?._id);
       dispatch(setCredentials({ ...response?.data }));
       toast.success("Registration successful");
       setIsLoading(false)

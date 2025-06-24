@@ -31,7 +31,8 @@ export const messageApiSlice = apiSlice.injectEndpoints({
       query: ({messageId, status}) => ({
         method: 'PATCH',
         credentials: 'include',
-        url: `/message/update-status/${messageId}`
+        url: `/message/update-status/${messageId}`,
+        body: {status}
       }),
       invalidatesTags: ['Message']
     }),

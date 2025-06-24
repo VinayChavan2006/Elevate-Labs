@@ -8,6 +8,7 @@ import {
   getAllChats,
   getChatDetails,
   getUserChats,
+  updateLastMessage,
 } from "../controllers/chatController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
@@ -21,4 +22,5 @@ chatRouter
   .post("/create-group",authenticate, createGroupChat)
   .post("/exit/:chatId",authenticate, exitGroupChat)
   .delete("/private/:chatId",authenticate, deletePrivateChat)
-  .delete("/group/:chatId",authenticate, deleteGroupChat);
+  .delete("/group/:chatId",authenticate, deleteGroupChat)
+  .patch("/update/last/:chatId",authenticate, updateLastMessage)

@@ -67,6 +67,15 @@ export const chatApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Chat']
     }),
+    updateLastMessage: builder.mutation({
+      query: ({ chatId, messageId }) => ({
+        url: `/chat/update/last/${chatId}`,
+        credentials: "include",
+        method: "PATCH",
+        body: {messageId}
+      }),
+      invalidatesTags: ['Chat']
+    }),
   }),
 });
 
@@ -79,4 +88,5 @@ export const {
   useExitGroupChatMutation,
   useDeletePrivateChatMutation,
   useDeleteGroupChatMutation,
+  useUpdateLastMessageMutation
 } = chatApiSlice;

@@ -32,6 +32,7 @@ const Login = () => {
       if (Object.keys(response?.data).length !== 0) {
         dispatch(setCredentials({ ...response?.data }));
       }
+      socket.emit('setup',response?.data?._id);
       toast.success("Login successful");
       // socket.emit('setup',{userId: response?.data?._id})
       navigate("/chat");

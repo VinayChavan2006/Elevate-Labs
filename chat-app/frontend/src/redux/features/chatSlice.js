@@ -15,6 +15,12 @@ const chatSlice = createSlice({
       state.chatItem = action.payload.ChatItem;
       state.chatStatus = action.payload.chatStatus
     },
+    updateChatLastMessage: (state, action) => {
+      state.chatItem.lastMessage = action.payload
+    },
+    updateChatStatus: (state, action) => {
+      state.chatItem.status = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(Logout().type, (state, action) => {
@@ -25,5 +31,5 @@ const chatSlice = createSlice({
   },
 });
 
-export const { setChat } = chatSlice.actions;
+export const { setChat, updateChatLastMessage, updateChatStatus } = chatSlice.actions;
 export default chatSlice.reducer;

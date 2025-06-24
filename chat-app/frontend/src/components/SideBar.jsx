@@ -36,6 +36,7 @@ function Sidebar() {
     try {
       const {data} = await logout();
       if(data){
+        socket.emit('logout',data?.userId)
         dispatch(Logout())
         navigate("/login")
       }

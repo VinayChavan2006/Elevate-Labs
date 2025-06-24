@@ -31,6 +31,10 @@ export const connectSocketIO = (io) => {
       socket.to(chatId).emit("stop-typing", chatId)
     })
 
+    socket.on("clear-chat",(chatId)=>{
+      io.to(chatId).emit("clear-chat",{chatId})
+    })
+
     socket.on("logout", (userId)=>{
       if(userId){
         onlineUsers.delete(userId);
