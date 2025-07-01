@@ -262,7 +262,7 @@ const ChatWindow = () => {
   },[messages.length])
 
   return (
-    <div className="w-[60%] h-100vh">
+    <div className="w-[60%] h-screen">
       {!selectedChat ? (
         <div className="h-full flex justify-center items-center">
           <p>Select a Chat to start messaging</p>

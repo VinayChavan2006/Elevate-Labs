@@ -36,7 +36,7 @@ const ChatList = ({ setIsPopupOpen, data, isLoading, error, onlineStatus }) => {
 
 
   return (
-    <div className="w-2/5 h-full bg-white shadow p-4">
+    <div className="w-2/5 h-screen bg-white shadow p-4">
       <div className="flex justify-between">
         <p className="text-2xl">Chats</p>
         <button
