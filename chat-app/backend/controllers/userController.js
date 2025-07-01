@@ -84,7 +84,7 @@ export const logout = (req, res) => {
       httpOnly: true,
       expires: new Date(0),
       secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production"
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
     });
     // socket.emit('logout',req.user?._id)
     return res.status(200).json({
